@@ -1,0 +1,16 @@
+{
+  "name": "sql-employee-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "inquirer": "^8.2.4",
+    "mysql2": "^3.7.1"
+  },
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
