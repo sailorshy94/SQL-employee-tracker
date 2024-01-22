@@ -7,7 +7,7 @@ USE business_db;
 
 SELECT DATABASE();
 
-CREATE TABLE department (
+CREATE TABLE departments (
     id INT NOT NULL AUTO-INCREMENT,
     name VARCHAR (30) NOT NULL,
     PRIMARY KEY (id)
@@ -33,6 +33,7 @@ CREATE TABLE employees (
     FOREIGN KEY (job_titles_id)
     REFERENCES job_titles(id)
     ON DELETE SET NULL,
+    /* manager_id is NULL if no manager */
     FOREIGN KEY (manager_id) 
     REFERENCES (manager_id)
     ON DELETE SET NULL,
