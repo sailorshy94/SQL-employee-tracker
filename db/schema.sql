@@ -35,7 +35,6 @@ CREATE TABLE employees (
     ON DELETE SET NULL,
     /* manager_id is NULL if no manager */
     FOREIGN KEY (manager_id) 
-    REFERENCES (manager_id)
-    ON DELETE SET NULL,
+    REFERENCES employees(id),
     PRIMARY KEY (id)
 );
