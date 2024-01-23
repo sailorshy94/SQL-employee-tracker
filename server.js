@@ -8,11 +8,11 @@ const db = mysql.createConnection(
     {
         host: '',
 
-        user: '',
+        user: 'root',
 
         password: '',
 
-        database: ''
+        database: 'business'
     },
     console.log(`Connected to business database.`)
 );
