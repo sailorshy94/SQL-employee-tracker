@@ -18,15 +18,15 @@ VALUES ('Store Manager', 50000, 3),
 ('Chief Marketing Officer', 100000, 4);
 
 INSERT INTO employees (first_name, last_name, job_title_id, manager_id)
-VALUES ('Al', 'Rich', 10),
+VALUES ('Al', 'Rich', 10, NULL),
 ('Sophia', 'Clem', 3, 4),
-('Mitch', 'Scoop', 4),
+('Mitch', 'Scoop', 4, NULL),
 ('Patrick', 'Star', 5, 3),
 ('Robert', 'Sponge', 9, 10),
 ('Jill', 'James', 8, 9),
-('Griff', 'Ruff', 7),
+('Griff', 'Ruff', 7, NULL),
 ('Frodo', 'Bag', 6, 7),
-('Chester', 'Cheetah', 1),
+('Chester', 'Cheetah', 1, NULL),
 ('Minny', 'Mathers', 2, 1);
 
 
