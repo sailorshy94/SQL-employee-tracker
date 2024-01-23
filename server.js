@@ -6,13 +6,8 @@ const mysql = require('mysql2');
 // connects to business_db
 const db = mysql.createConnection(
     {
-        host: '',
-
         user: 'root',
-
-        password: '',
-
-        database: 'business'
+        database: 'business_db'
     },
     console.log(`Connected to business database.`)
 );
