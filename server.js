@@ -22,8 +22,8 @@ questions (
     message: 'Select an option to view data',
     choices: [
         'View All Departments',
-        // 'View All Roles',
-        // 'View All Employees'
+        'View All Roles',
+        'View All Employees'
     ]
     // console logs response obj in terminal
     }).then((response) => {
