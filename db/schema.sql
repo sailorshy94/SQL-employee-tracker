@@ -25,7 +25,7 @@ CREATE TABLE job_titles (
 );
 
 CREATE TABLE employees (
-    id INT NOT NULL AUTO-INCREEMENT,
+    id INT NOT NULL AUTO-INCREMENT,
     first_name VARCHAR (30) NOT NULL,
     last_name VARCHAR (30) NOT NULL,
     job_title_id INT NOT NULL,
