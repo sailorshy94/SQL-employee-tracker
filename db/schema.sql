@@ -16,7 +16,6 @@ CREATE TABLE job_titles (
     departments_id INT NOT NULL,
     FOREIGN KEY (departments_id)
     REFERENCES departments(id)
-    ON DELETE SET NULL
 );
 
 CREATE TABLE employees (
