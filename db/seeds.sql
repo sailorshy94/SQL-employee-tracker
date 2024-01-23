@@ -1,3 +1,5 @@
+USE business_db;
+
 INSERT INTO departments (name)
 VALUES ('Human Resources'),
 ('Customer Service'),
@@ -18,14 +20,14 @@ VALUES ('Store Manager', 50000, 3),
 
 INSERT INTO employees (first_name, last_name, job_titles_id, manager_id)
 VALUES ('Al', 'Rich', 10, NULL),
-('Sophia', 'Clem', 3, 4),
+('Sophia', 'Clem', 3, NULL),
 ('Mitch', 'Scoop', 4, NULL),
-('Patrick', 'Star', 5, 3),
-('Robert', 'Sponge', 9, 10),
-('Jill', 'James', 8, 9),
+('Patrick', 'Star', 5, NULL),
+('Robert', 'Sponge', 9, NULL),
+('Jill', 'James', 8, NULL),
 ('Griff', 'Ruff', 7, NULL),
-('Frodo', 'Bag', 6, 7),
+('Frodo', 'Bag', 6, NULL),
 ('Chester', 'Cheetah', 1, NULL),
-('Minny', 'Mathers', 2, 1);
+('Minny', 'Mathers', 2, NULL);
 
 
