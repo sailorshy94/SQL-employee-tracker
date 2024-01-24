@@ -12,7 +12,6 @@ const db = mysql.createConnection(
     console.log(`Connected to business database.`)
 );
 
-// TODO: create init function to wrap around prompt module so it will come up ea time
 const init = () => {
     const questions = inquirer.createPromptModule();
     questions(
@@ -24,7 +23,8 @@ const init = () => {
             choices: [
                 'View All Departments',
                 'View All Roles',
-                'View All Employees'
+                'View All Employees',
+                'Exit'
             ]
             // console logs response obj in terminal
         }).then((response) => {
@@ -50,6 +50,10 @@ const init = () => {
                     console.table(employees);
                     init();
                 })
+            }
+            if (response.views === 'Exit') {
+                console.log(`Exiting...bye`);
+                process.exit();
             }
         })
 };
