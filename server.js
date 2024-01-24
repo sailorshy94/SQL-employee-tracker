@@ -22,7 +22,7 @@ questions (
     message: 'Select an option to view data',
     choices: [
         'View All Departments',
-        // 'View All Roles',
+        'View All Roles',
         // 'View All Employees'
     ]
     // console logs response obj in terminal
@@ -33,6 +33,12 @@ questions (
                 if (error) console.error(error);
                 // displays query as a table in terminal
                 console.table(departments);
+            })
+        }
+        if (response.views === 'View All Roles'){
+            db.query('SELECT * FROM job_titles', (error, job_titles) => {
+                if (error) console.error(error);
+                console.table(job_titles);
             })
         }
     });
