@@ -1,3 +1,7 @@
+//TODO: 
+    // create lookup table
+    // create list of functions
+
 // imports inquirer
 const inquirer = require('inquirer');
 // imports mysql
@@ -24,6 +28,10 @@ const init = () => {
                 'View All Departments',
                 'View All Roles',
                 'View All Employees',
+                'Add new Department',
+                // 'Add new Role',
+                // 'Add new Employee',
+                // 'Update existing Employee Role',
                 'Exit'
             ]
             // console logs response obj in terminal
@@ -37,6 +45,7 @@ const init = () => {
                     init();
                 })
             }
+
             if (response.views === 'View All Roles') {
                 db.query('SELECT * FROM job_titles', (error, job_titles) => {
                     if (error) console.error(error);
@@ -44,6 +53,7 @@ const init = () => {
                     init();
                 })
             }
+
             if (response.views === 'View All Employees') {
                 db.query('SELECT * FROM employees', (error, employees) => {
                     if (error) console.error(error);
@@ -51,6 +61,63 @@ const init = () => {
                     init();
                 })
             }
+
+            if (response.views === 'Add new Department') {
+                const prompt = inquirer.createPromptModule();
+                prompt({
+                    type: 'input',
+                    name: 'new_dept',
+                    message: 'Please enter a title for new department',
+                })
+                db.query('INSERT ? INTO departments', `${prompt.new_dept}`, (error) => {
+                    // if (error) console.error(error);
+                    // console.log(`${prompt.new_dept} department added to database`);
+                    // init();
+                })
+            }
+
+            if (response.views === 'Add new Role') {
+                const prompt = inquirer.createPromptModule();
+                prompt({
+                    type: 'input',
+                    name: 'new_role',
+                    message: 'Please enter',
+                })
+                db.query('INSERT ? INTO', (error) => {
+                    // if (error) console.error(error);
+                    // console.log(`${prompt.new_dept} department added to database`);
+                    // init();
+                })
+            }
+
+            if (response.views === 'Add new Employee') {
+                const prompt = inquirer.createPromptModule();
+                prompt({
+                    type: 'input',
+                    name: 'new_employee',
+                    message: 'Please enter',
+                })
+                db.query('INSERT ? INTO', (error) => {
+                    // if (error) console.error(error);
+                    // console.log(`${prompt.new_dept} department added to database`);
+                    // init();
+                })
+            }
+
+            if (response.views === 'Update existing Employee role') {
+                const prompt = inquirer.createPromptModule();
+                prompt({
+                    type: 'input',
+                    name: 'update',
+                    message: '',
+                })
+                db.query('INSERT ? INTO', (error) => {
+                    // if (error) console.error(error);
+                    // console.log(`${prompt.new_dept} department added to database`);
+                    // init();
+                })
+            }
+
             if (response.views === 'Exit') {
                 console.log(`Exiting...bye`);
                 process.exit();
