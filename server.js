@@ -22,12 +22,19 @@ questions (
     message: 'Select an option to view data',
     choices: [
         'View All Departments',
-        'View All Roles',
-        'View All Employees'
+        // 'View All Roles',
+        // 'View All Employees'
     ]
     // console logs response obj in terminal
     }).then((response) => {
-        console.log(response);
+        // console.log(response);
+        if (response.views === 'View All Departments'){
+            db.query('SELECT * FROM departments', (error, departments) => {
+                if (error) console.error(error);
+                // displays query as a table in terminal
+                console.table(departments);
+            })
+        }
     });
 
 // TODO: create init function to wrap around prompt module so it will come up ea time
