@@ -2,7 +2,7 @@
   "name": "sql-employee-tracker",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "dependencies": {
     "inquirer": "^8.2.4",
     "mysql2": "^3.7.1"

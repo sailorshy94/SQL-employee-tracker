@@ -18,16 +18,16 @@ VALUES ('Store Manager', 50000, 3),
 ('Marketing Director', 85000, 4),
 ('Chief Marketing Officer', 100000, 4);
 
-INSERT INTO employees (first_name, last_name, job_titles_id, manager_id)
-VALUES ('Al', 'Rich', 10, NULL),
-('Mitch', 'Scoop', 4, NULL),
-('Griff', 'Ruffer', 7, NULL),
-('Chester', 'Cheetah', 1, NULL),
-('Minny', 'Mathers', 2, NULL),
-('Sophia', 'Clem', 3, 2),
-('Patrick', 'Star', 5, 2),
-('Robert', 'Sponge', 9, 5),
-('Jill', 'James', 8, 4),
-('Frodo', 'Bag', 6, 7);
+INSERT INTO employees (first_name, last_name, job_titles_id, manager_id, manager)
+VALUES ('Al', 'Rich', 10, NULL, NULL),
+('Mitch', 'Scoop', 4, NULL, NULL),
+('Griff', 'Ruffer', 7, NULL, NULL),
+('Chester', 'Cheetah', 1, NULL, NULL),
+('Minny', 'Mathers', 2, 1, 'Al Rich'),
+('Sophia', 'Clem', 3, 2, 'Mitch Scoop'),
+('Patrick', 'Star', 5, 2, 'Mitch Scoop'),
+('Robert', 'Sponge', 9, 5, 'Minny Mathers'),
+('Jill', 'James', 8, 4, 'Chester Cheetah'),
+('Frodo', 'Bag', 6, 3, 'Griff Ruffer');
 
 
