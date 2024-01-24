@@ -20,14 +20,14 @@ VALUES ('Store Manager', 50000, 3),
 
 INSERT INTO employees (first_name, last_name, job_titles_id, manager_id)
 VALUES ('Al', 'Rich', 10, NULL),
-('Sophia', 'Clem', 3, 1),
 ('Mitch', 'Scoop', 4, NULL),
-('Patrick', 'Star', 5, 3),
-('Robert', 'Sponge', 9, 1),
-('Jill', 'James', 8, 1),
-('Griff', 'Ruff', 7, NULL),
-('Frodo', 'Bag', 6, 7),
+('Griff', 'Ruffer', 7, NULL),
 ('Chester', 'Cheetah', 1, NULL),
-('Minny', 'Mathers', 2, 9);
+('Minny', 'Mathers', 2, NULL),
+('Sophia', 'Clem', 3, 2),
+('Patrick', 'Star', 5, 2),
+('Robert', 'Sponge', 9, 5),
+('Jill', 'James', 8, 4),
+('Frodo', 'Bag', 6, 7);
 
 
