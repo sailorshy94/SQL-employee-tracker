@@ -23,7 +23,7 @@ questions (
     choices: [
         'View All Departments',
         'View All Roles',
-        // 'View All Employees'
+        'View All Employees'
     ]
     // console logs response obj in terminal
     }).then((response) => {
@@ -39,6 +39,12 @@ questions (
             db.query('SELECT * FROM job_titles', (error, job_titles) => {
                 if (error) console.error(error);
                 console.table(job_titles);
+            })
+        }
+        if (response.views === 'View All Employees'){
+            db.query('SELECT * FROM employees', (error, employees) => {
+                if (error) console.error(error);
+                console.table(employees);
             })
         }
     });
