@@ -80,7 +80,7 @@ const init = () => {
                 const prompt = inquirer.createPromptModule();
                 prompt({
                     type: 'input',
-                    name: 'name',
+                    name: 'title',
                     message: 'Please enter title of new role',
                 }).then((answers) => {
                     (console.log(answers))
