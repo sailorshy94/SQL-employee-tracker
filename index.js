@@ -4,6 +4,9 @@ const inquirer = require('inquirer');
 // imports mysql
 const mysql = require('mysql2');
 
+function doSomething() {
+
+}
 // connects to business_db and logs connection msg
 const db = mysql.createConnection(
     {
@@ -89,17 +92,17 @@ const init = () => {
                         name: 'title',
                         message: 'Please enter title of new role'
                     },
-                        {
-                            type: 'input',
-                            name: 'salary',
-                            message: 'Please enter salary for new role'
-                        },
-                        {
-                            type: 'rawlist',
-                            name: 'departments_id',
-                            message: 'Please enter department for new role',
-                            choices: departmentChoices
-                        }]
+                    {
+                        type: 'input',
+                        name: 'salary',
+                        message: 'Please enter salary for new role'
+                    },
+                    {
+                        type: 'rawlist',
+                        name: 'departments_id',
+                        message: 'Please enter department for new role',
+                        choices: departmentChoices
+                    }]
                     ).then((answers) => {
                         (console.log(answers))
                         db.query('INSERT INTO job_titles SET ?', answers, (error) => {
@@ -138,43 +141,50 @@ const init = () => {
                             name: 'title',
                             message: 'Please assign a role for the new employee',
                             choices: jobTitleChoices
-                        })
-                    })
-                })
-                    .then((results) => {
-                        console.log(results);
+                        }).then((results) => {
+                            console.log(results);
 
-                        db.query('SELECT * FROM employees', (error, employees) => {
-                            if (error) console.error(error);
-                            console.log(employees);
-                            const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
-                                name: `${first_name} ${last_name}`,
-                                value: id
-                            }))
-
-                            inquirer.prompt({
-                                type: 'rawlist',
-                                name: 'title',
-                                message: 'Please assign a manager for the new employee',
-                                choices: employeeChoices
+                            db.query('SELECT * FROM employees', (error, employees) => {
+                                if (error) console.error(error);
+                                console.log(employees);
+                                const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
+                                    name: `${first_name} ${last_name}`,
+                                    value: id
+                                }))
+                                inquirer.prompt({
+                                    type: 'rawlist',
+                                    name: 'title',
+                                    message: 'Please assign a manager for the new employee',
+                                    choices: employeeChoices
+                                }
+                                ).then((data) => {
+                                    let employee = { 
+                                        manager_id: data.id,
+                                        role_id: results.id,
+                                        first_name: firstName,
+                                        last_name: lastName
+                                    }
+                                    db.query('INSERT INTO employees SET ?')
+                                })
                             })
                         })
                     })
+                })
             }
 
-            if (response.views === 'Update existing Employee role') {
-                const prompt = inquirer.createPromptModule();
-                prompt({
-                    type: 'input',
-                    name: 'update',
-                    message: '',
-                })
-                db.query('INSERT ? INTO', (error) => {
-                    // if (error) console.error(error);
-                    // console.log(`${prompt.new_dept} department added to database`);
-                    // init();
-                })
-            }
+            // if (response.views === 'Update existing Employee role') {
+            //     const prompt = inquirer.createPromptModule();
+            //     prompt({
+            //         type: 'input',
+            //         name: 'update',
+            //         message: '',
+            //     })
+            //     db.query('INSERT ? INTO', (error) => {
+            //         // if (error) console.error(error);
+            //         // console.log(`${prompt.new_dept} department added to database`);
+            //         // init();
+            //     })
+            // }
 
             if (response.views === 'Exit') {
                 console.log(`Exiting...bye`);
