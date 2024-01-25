@@ -1,6 +1,6 @@
 //TODO: 
-    // create lookup table
-    // create list of functions
+// create lookup table
+// create list of functions
 
 // imports inquirer
 const inquirer = require('inquirer');
@@ -30,7 +30,7 @@ const init = () => {
                 'View All Employees',
                 'Add new Department',
                 // 'Add new Role',
-                // 'Add new Employee',
+                'Add new Employee',
                 // 'Update existing Employee Role',
                 'Exit'
             ]
@@ -66,16 +66,19 @@ const init = () => {
                 const prompt = inquirer.createPromptModule();
                 prompt({
                     type: 'input',
-                    name: 'new_dept',
-                    message: 'Please enter a title for new department',
-                })
-                db.query('INSERT ? INTO departments', `${prompt.new_dept}`, (error) => {
-                    // if (error) console.error(error);
-                    // console.log(`${prompt.new_dept} department added to database`);
-                    // init();
+                    name: 'name',
+                    message: 'Please enter a title for new department'
+                }).then((answers) => {
+                    (console.log(answers))
+                    db.query('INSERT INTO departments SET ?', answers, (error) => {
+                        if (error) console.error(error);
+                        console.log(`New department added to database`);
+                        init();
+                    })
                 })
             }
 
+            // rinse and repeat above
             if (response.views === 'Add new Role') {
                 const prompt = inquirer.createPromptModule();
                 prompt({
@@ -92,17 +95,33 @@ const init = () => {
 
             if (response.views === 'Add new Employee') {
                 const prompt = inquirer.createPromptModule();
-                prompt({
+                prompt([{
                     type: 'input',
-                    name: 'new_employee',
-                    message: 'Please enter',
+                    name: 'first_name',
+                    message: 'Please enter new employee first name'
+                },
+                {
+                    type: 'input',
+                    name: 'last_name',
+                    message: 'Please enter new employee last name'
+                }]).then((answers) => {
+                    console.log(answers);
+                    inquirer.prompt({
+                        type: 'input',
+                        name: 'title',
+                        message: 'Please assign a role for the new employee',
+                        choices: [
+                            
+                        ]
+                    })
                 })
-                db.query('INSERT ? INTO', (error) => {
+            }
+                // db.query('INSERT ? INTO', (error) => {
                     // if (error) console.error(error);
                     // console.log(`${prompt.new_dept} department added to database`);
                     // init();
-                })
-            }
+            //     })
+            // }
 
             if (response.views === 'Update existing Employee role') {
                 const prompt = inquirer.createPromptModule();
