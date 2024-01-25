@@ -1,6 +1,3 @@
-//TODO: 
-// create lookup table
-// create list of functions
 
 // imports inquirer
 const inquirer = require('inquirer');
@@ -29,7 +26,7 @@ const init = () => {
                 'View All Roles',
                 'View All Employees',
                 'Add new Department',
-                // 'Add new Role',
+                'Add new Role',
                 'Add new Employee',
                 // 'Update existing Employee Role',
                 'Exit'
@@ -83,13 +80,16 @@ const init = () => {
                 const prompt = inquirer.createPromptModule();
                 prompt({
                     type: 'input',
-                    name: 'new_role',
-                    message: 'Please enter',
-                })
-                db.query('INSERT ? INTO', (error) => {
-                    // if (error) console.error(error);
-                    // console.log(`${prompt.new_dept} department added to database`);
-                    // init();
+                    name: 'name',
+                    message: 'Please enter title of new role',
+                }).then((answers) => {
+                    (console.log(answers))
+                    db.query('INSERT INTO job_titles SET ?', answers, (error) => {
+                        if (error) console.error(error);
+                        console.log(`New role added to database`);
+                        init();
+                    })
+                
                 })
             }
 
@@ -116,7 +116,6 @@ const init = () => {
                             name: title,
                             value: id
                         }))
-
                         inquirer.prompt({
                             type: 'rawlist',
                             name: 'title',
