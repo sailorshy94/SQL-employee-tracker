@@ -106,22 +106,45 @@ const init = () => {
                     message: 'Please enter new employee last name'
                 }]).then((answers) => {
                     console.log(answers);
-                    inquirer.prompt({
-                        type: 'input',
-                        name: 'title',
-                        message: 'Please assign a role for the new employee',
-                        choices: [
-                            
-                        ]
+                    const firstName = answers.first_name;
+                    const lastName = answers.last_name;
+
+                    db.query('SELECT * FROM job_titles', (error, job_titles) => {
+                        if (error) console.error(error);
+                        console.log(job_titles);
+                        const jobTitleChoices = job_titles.map(({ id, title }) => ({
+                            name: title,
+                            value: id
+                        }))
+
+                        inquirer.prompt({
+                            type: 'rawlist',
+                            name: 'title',
+                            message: 'Please assign a role for the new employee',
+                            choices: jobTitleChoices
+                        })
+                    })
+                })
+                .then((results) => {
+                    console.log(results);
+
+                    db.query('SELECT * FROM employees', (error, employees) => {
+                        if (error) console.error(error);
+                        console.log(employees);
+                        const employeeChoices = employees.map(({ id,first_name, last_name }) => ({
+                            name: `${first_name} ${last_name}`,
+                            value: id
+                        }))
+
+                        inquirer.prompt({
+                            type: 'rawlist',
+                            name: 'title',
+                            message: 'Please assign a manager for the new employee',
+                            choices: employeeChoices
+                        })
                     })
                 })
             }
-                // db.query('INSERT ? INTO', (error) => {
-                    // if (error) console.error(error);
-                    // console.log(`${prompt.new_dept} department added to database`);
-                    // init();
-            //     })
-            // }
 
             if (response.views === 'Update existing Employee role') {
                 const prompt = inquirer.createPromptModule();
