@@ -29,8 +29,7 @@ const init = () => {
                 'Add new Role',
                 'Add new Employee',
                 // 'Update existing Employee Role',
-                'Exit'
-            ]
+                'Exit']
             // console logs response obj in terminal
         }).then((response) => {
             // console.log(response);
@@ -75,21 +74,39 @@ const init = () => {
                 })
             }
 
-            // rinse and repeat above
+
             if (response.views === 'Add new Role') {
                 const prompt = inquirer.createPromptModule();
-                prompt({
-                    type: 'input',
-                    name: 'title',
-                    message: 'Please enter title of new role',
-                }).then((answers) => {
-                    (console.log(answers))
-                    db.query('INSERT INTO job_titles SET ?', answers, (error) => {
-                        if (error) console.error(error);
-                        console.log(`New role added to database`);
-                        init();
+                db.query('SELECT * FROM departments', (error, departments) => {
+                    if (error) console.error(error);
+                    console.log(departments);
+                    const departmentChoices = departments.map(({ id, name }) => ({
+                        name: name,
+                        value: id
+                    }))
+                    prompt([{
+                        type: 'input',
+                        name: 'title',
+                        message: 'Please enter title of new role'
+                    },
+                        {
+                            type: 'input',
+                            name: 'salary',
+                            message: 'Please enter salary for new role'
+                        },
+                        {
+                            type: 'rawlist',
+                            name: 'departments_id',
+                            message: 'Please enter department for new role',
+                            choices: departmentChoices
+                        }]
+                    ).then((answers) => {
+                        (console.log(answers))
+                        db.query('INSERT INTO job_titles SET ?', answers, (error) => {
+                            if (error) console.error(error);
+                            init();
+                        })
                     })
-                
                 })
             }
 
@@ -124,25 +141,25 @@ const init = () => {
                         })
                     })
                 })
-                .then((results) => {
-                    console.log(results);
+                    .then((results) => {
+                        console.log(results);
 
-                    db.query('SELECT * FROM employees', (error, employees) => {
-                        if (error) console.error(error);
-                        console.log(employees);
-                        const employeeChoices = employees.map(({ id,first_name, last_name }) => ({
-                            name: `${first_name} ${last_name}`,
-                            value: id
-                        }))
+                        db.query('SELECT * FROM employees', (error, employees) => {
+                            if (error) console.error(error);
+                            console.log(employees);
+                            const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
+                                name: `${first_name} ${last_name}`,
+                                value: id
+                            }))
 
-                        inquirer.prompt({
-                            type: 'rawlist',
-                            name: 'title',
-                            message: 'Please assign a manager for the new employee',
-                            choices: employeeChoices
+                            inquirer.prompt({
+                                type: 'rawlist',
+                                name: 'title',
+                                message: 'Please assign a manager for the new employee',
+                                choices: employeeChoices
+                            })
                         })
                     })
-                })
             }
 
             if (response.views === 'Update existing Employee role') {
