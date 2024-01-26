@@ -35,7 +35,7 @@ const init = () => {
                 db.query('SELECT * FROM departments', (error, departments) => {
                     if (error) console.error(error);
                     // displays query as a table in terminal
-                    console.log(departments);
+                    console.table(departments);
                     init();
                 })
             }
@@ -118,7 +118,6 @@ const init = () => {
                     name: 'last_name',
                     message: 'Please enter new employee last name'
                 }]).then((answers) => {
-                    console.log(answers);
                     const firstName = answers.first_name;
                     const lastName = answers.last_name;
 
