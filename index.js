@@ -104,7 +104,7 @@ const init = () => {
                         choices: departmentChoices
                     }]
                     ).then((answers) => {
-                        (console.log(answers))
+                        // (console.log(answers))
                         db.query('INSERT INTO job_titles SET ?', answers, (error) => {
                             if (error) console.error(error);
                             init();
@@ -142,8 +142,7 @@ const init = () => {
                             message: 'Please assign a role for the new employee',
                             choices: jobTitleChoices
                         }).then((results) => {
-                            console.log(results);
-
+                            // console.log(results);
                             db.query('SELECT * FROM employees', (error, employees) => {
                                 if (error) console.error(error);
                                 console.log(employees);
@@ -164,14 +163,18 @@ const init = () => {
                                         first_name: firstName,
                                         last_name: lastName
                                     }
-                                    db.query('INSERT INTO employees SET ?')
+                                    db.query('INSERT INTO employees SET ?', employee, (error, result) => {
+                                        if (error) console.error(error);
+                                        console.log(`New employee added to database`);
+                                        init();
+                                    })
                                 })
                             })
                         })
                     })
                 })
             }
-
+ 
             // if (response.views === 'Update existing Employee role') {
             //     const prompt = inquirer.createPromptModule();
             //     prompt({
