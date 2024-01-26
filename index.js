@@ -123,7 +123,7 @@ const init = () => {
 
                     db.query('SELECT * FROM job_titles', (error, job_titles) => {
                         if (error) console.error(error);
-                        console.log(job_titles);
+                        // console.log(job_titles);
                         const jobTitleChoices = job_titles.map(({ id, title }) => ({
                             name: title,
                             value: id
@@ -136,7 +136,7 @@ const init = () => {
                         }).then((results) => {
                             db.query('SELECT * FROM employees', (error, employees) => {
                                 if (error) console.error(error);
-                                console.log(employees);
+                                // console.log(employees);
                                 const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
                                     name: `${first_name} ${last_name}`,
                                     value: id
@@ -147,14 +147,16 @@ const init = () => {
                                     message: 'Please assign a manager for the new employee',
                                     choices: employeeChoices
                                 }
-                                ).then((data) => {
+                                ).then((results, data) => {
+                                    console.log(results, data);
                                     let employee = {
                                         manager_id: data.id,
-                                        role_id: results.id,
+                                        job_titles: results.id,
                                         first_name: firstName,
                                         last_name: lastName
                                     }
-                                    db.query('INSERT INTO employees SET ?', employee, (error) => {
+                                    console.log(employee);
+                                    db.query('INSERT INTO employees SET ?', employee, (error, results) => {
                                         if (error) console.error(error);
                                         console.log(`New employee added to database`);
                                         init();
@@ -179,13 +181,12 @@ const init = () => {
                                 // init();
                             })
                         }
-            
-                        if (response.views === 'Exit') {
-                            console.log(`Exiting...bye`);
-                            process.exit();
-                        }
-                    })
-            */
+                                    */
+
+            if (response.views === 'Exit') {
+                console.log(`Exiting...bye`);
+                process.exit();
+            }
         })
 };
 
