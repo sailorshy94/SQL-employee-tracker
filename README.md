@@ -7,5 +7,5 @@ The purpose of this application is to build a command-line application that serv
 ![Image Link](./assets/SQL-emp-db-screenshot.png)
 
 ## Links
-[Video Walkthrough Link]()
-[GitHub Repo Link]()
+[Video Walkthrough Link](https://drive.google.com/file/d/1D-xdBW3ufQBDMReLODoNGmvO1SO0gcWG/view)
+[GitHub Repo Link](https://github.com/sailorshy94/SQL-employee-tracker)
