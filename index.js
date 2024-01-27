@@ -4,9 +4,6 @@ const inquirer = require('inquirer');
 // imports mysql
 const mysql = require('mysql2');
 
-function doSomething() {
-
-}
 // connects to business_db and logs connection msg
 const db = mysql.createConnection(
     {
@@ -82,7 +79,7 @@ const init = () => {
                 const prompt = inquirer.createPromptModule();
                 db.query('SELECT * FROM departments', (error, departments) => {
                     if (error) console.error(error);
-                    console.log(departments);
+                    // console.log(departments);
                     const departmentChoices = departments.map(({ id, name }) => ({
                         name: name,
                         value: id
@@ -104,7 +101,7 @@ const init = () => {
                         choices: departmentChoices
                     }]
                     ).then((answers) => {
-                        (console.log(answers))
+                        // (console.log(answers))
                         db.query('INSERT INTO job_titles SET ?', answers, (error) => {
                             if (error) console.error(error);
                             init();
@@ -131,7 +128,7 @@ const init = () => {
 
                     db.query('SELECT * FROM job_titles', (error, job_titles) => {
                         if (error) console.error(error);
-                        console.log(job_titles);
+                        // console.log(job_titles);
                         const jobTitleChoices = job_titles.map(({ id, title }) => ({
                             name: title,
                             value: id
@@ -146,7 +143,7 @@ const init = () => {
 
                             db.query('SELECT * FROM employees', (error, employees) => {
                                 if (error) console.error(error);
-                                console.log(employees);
+                                // console.log(employees);
                                 const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
                                     name: `${first_name} ${last_name}`,
                                     value: id
@@ -164,11 +161,12 @@ const init = () => {
                                         first_name: firstName,
                                         last_name: lastName
                                     }
-                                    console.log(results);
+                                    // console.log(results);
                                     db.query('INSERT INTO employees SET ?', employee, (error, employees) => {
                                         if (error) console.error(error);
-                                        console.log(employee);
+                                        console.log(`New employee added to database`);
                                         init();
+
                                     })
                                 })
                             })
